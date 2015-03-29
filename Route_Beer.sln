@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.22609.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Route_Beer", "Route_Beer\Route_Beer.csproj", "{063ED275-8DAB-4613-BB12-696A5F0E1E72}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{063ED275-8DAB-4613-BB12-696A5F0E1E72}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{063ED275-8DAB-4613-BB12-696A5F0E1E72}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{063ED275-8DAB-4613-BB12-696A5F0E1E72}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{063ED275-8DAB-4613-BB12-696A5F0E1E72}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(CodealikeProperties) = postSolution
+		SolutionGuid = 615d6346-8429-41c7-9fe9-5111fb9d5fa9
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,70 @@
+﻿<Window x:Class="Route_Beer.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		xmlns:System="clr-namespace:System;assembly=mscorlib"
+        xmlns:local="clr-namespace:Route_Beer.ViewModels"
+		xmlns:enum="clr-namespace:Route_Beer.Models"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="459" Width="815">
+
+	<Canvas>
+		<Canvas.DataContext>
+			<local:TestViewModel />
+		</Canvas.DataContext>
+		<DockPanel>
+			<Menu DockPanel.Dock="Top">
+				<MenuItem Header="_File">
+					<MenuItem Header="_Open" Command="{Binding OpenTestsCommand}"/>
+					<MenuItem Header="_Save" Command="{Binding SaveTestsCommand}"/>
+				</MenuItem>
+			</Menu>
+		</DockPanel>
+
+		<GroupBox x:Name="groupBox" Header="Test" HorizontalAlignment="Left" Height="193" VerticalAlignment="Top" Width="281" Canvas.Left="10" Canvas.Top="27">
+			<Grid>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto" />
+				</Grid.RowDefinitions>
+
+				<Grid.Resources>
+					<ObjectDataProvider x:Key="dataFromEnum" MethodName="GetValues"
+										ObjectType="{x:Type System:Enum}">
+						<ObjectDataProvider.MethodParameters>
+							<x:Type TypeName="enum:RestRequest" />
+						</ObjectDataProvider.MethodParameters>
+					</ObjectDataProvider>
+				</Grid.Resources>
+				<TextBox x:Name="txtTestName" Text="{Binding TxtTestName}" Width="150" Height="30" Margin="77,10,42,131" VerticalContentAlignment="Center"/>
+				<TextBox x:Name="txtBaseUrl" Text="{Binding TxtBaseUrl}" Width="150" Height="30" Margin="77,44,42,97" VerticalContentAlignment="Center"/>
+				<TextBox x:Name="txtRoute" Text="{Binding TxtRoute}" Width="150" Height="30" Margin="77,78,42,63" VerticalContentAlignment="Center"/>
+				<ComboBox x:Name="cmbRequestType" Height="25" IsReadOnly="True" ItemsSource="{Binding Source={StaticResource dataFromEnum}}" 
+						SelectedItem="{Binding CmbRequestType}" Margin="77,113,117,33" Width="75" VerticalContentAlignment="Center"/>
+				<Button x:Name="btnAddTest" Content="Add" HorizontalAlignment="Left" Margin="159,113,0,0" VerticalAlignment="Top" Width="68" Height="25" Command="{Binding AddTestCommand}" RenderTransformOrigin="0.116,-0.6"/>
+				<Label x:Name="lblTestName" Content="Name" HorizontalAlignment="Left" Margin="10,14,0,0" VerticalAlignment="Top"/>
+				<Label x:Name="lblBaseUrl" Content="Base URL" HorizontalAlignment="Left" Margin="10,48,0,0" VerticalAlignment="Top"/>
+				<Label x:Name="lblRoute" Content="Route" HorizontalAlignment="Left" Margin="11,82,0,0" VerticalAlignment="Top"/>
+				<CheckBox x:Name="chkBaseUrl" HorizontalAlignment="Left" Margin="232,52,0,0" VerticalAlignment="Top" IsChecked="{Binding PersistBaseUrl, Mode=TwoWay}"/>
+				<CheckBox x:Name="chkRoute" HorizontalAlignment="Left" Margin="232,86,0,0" VerticalAlignment="Top" IsChecked="{Binding PersistRoute, Mode=TwoWay}"/>
+			</Grid>
+		</GroupBox>
+
+		<ListView x:Name="listView" Height="183" Canvas.Left="331" Canvas.Top="37" Width="372" ItemsSource="{Binding TestList}">
+			<ListView.View>
+				<GridView>
+					<GridViewColumn Header="Name" DisplayMemberBinding="{Binding Path=Name}"/>
+					<GridViewColumn Header="Status" DisplayMemberBinding="{Binding Path=PassingStatus}"/>
+					<GridViewColumn Header="Request" DisplayMemberBinding="{Binding Path=RequestType}"/>
+					<GridViewColumn Header="Url" DisplayMemberBinding="{Binding Path=FullUrl}"/>
+				</GridView>
+			</ListView.View>
+		</ListView>
+		
+		<ScrollViewer Canvas.Left="10" Canvas.Top="275" Width="693" Height="143">
+			<TextBlock x:Name="txtTestResults" Width="Auto" Canvas.Left="10" TextWrapping="Wrap" Text="{Binding TxtTestResults}" Canvas.Top="275" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True"/>
+		</ScrollViewer>
+		
+		<Button x:Name="btnRunTests" Content="Run All" Canvas.Left="10" Canvas.Top="239" Width="75" Command="{Binding RunTestsCommand}"/>
+	</Canvas>
+</Window>
